@@ -1,0 +1,11 @@
+
+#ifndef CONVERT_INTBOX_TO_LASTER_POSITION__H
+
+
+#include "VOL.h"
+
+VOL_LOCATIONARRAY* ConvertIntBoxToLasterPosition(VOL_INTBOX3D* box, VOL_INTSIZE3D* size);
+
+
+#define CONVERT_INTBOX_TO_LASTER_POSITION__H
+#endif

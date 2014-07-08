@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4aa4d2a9-fa2e-444f-ba4b-b2739df9891b}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{5183b617-1d16-4e4c-8098-66c62e6cd336}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\HaarFeatures">
+      <UniqueIdentifier>{98ddb72c-506d-4602-a033-7f25d1704c81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\HaralickFeatures">
+      <UniqueIdentifier>{84379d8d-cb5b-44e5-b787-4bb42bb97507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Hu3DMomentInvariants">
+      <UniqueIdentifier>{a01bc8db-61eb-4f88-baa1-2d4335ecf45f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\VoxelValueStatistics">
+      <UniqueIdentifier>{baaec38e-78ac-4cb8-9742-ac6e5bcd0cfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Utilities">
+      <UniqueIdentifier>{910844f9-0803-4492-a2b8-af9e351eceb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Utilities\a">
+      <UniqueIdentifier>{eed6be8e-91c7-47d4-a171-80075187f47d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Utilities\c">
+      <UniqueIdentifier>{9a4e1a79-46cc-49c7-a3c0-6c473d0f4f87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Utilities\d">
+      <UniqueIdentifier>{fa0ef449-321c-4d43-9bb7-57a033bdbf2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Utilities\g">
+      <UniqueIdentifier>{f596cbe9-3edf-4c1e-b922-6f49a45465f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Utilities\i">
+      <UniqueIdentifier>{fc421e96-d0a9-4552-9215-f5440849d8b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Utilities\s">
+      <UniqueIdentifier>{0a5fb4ab-6487-4fcf-bdd3-dc5546dba32c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\HaarFeaturesByIntegral">
+      <UniqueIdentifier>{b0522d98-339e-4de5-868e-dec910bbf798}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Utilities\b">
+      <UniqueIdentifier>{f373a3b4-1a6c-4d50-9200-8596d0c5ea57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CurvatureFeatures">
+      <UniqueIdentifier>{03420e62-c291-4c6a-9d2f-2a3fb16d3326}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\LibVoxelwiseFeatures.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="source\HaarFeatures\HaarFeatures.h">
+      <Filter>ソース ファイル\HaarFeatures</Filter>
+    </ClInclude>
+    <ClInclude Include="source\HaarFeatures\HaarFeatures.private.h">
+      <Filter>ソース ファイル\HaarFeatures</Filter>
+    </ClInclude>
+    <ClInclude Include="source\HaralickFeatures\HaralickFeatures.h">
+      <Filter>ソース ファイル\HaralickFeatures</Filter>
+    </ClInclude>
+    <ClInclude Include="source\HaralickFeatures\HaralickFeatures.private.h">
+      <Filter>ソース ファイル\HaralickFeatures</Filter>
+    </ClInclude>
+    <ClInclude Include="source\VoxelValueStatistics\VoxelValueStatistics.h">
+      <Filter>ソース ファイル\VoxelValueStatistics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\VoxelValueStatistics\VoxelValueStatistics.private.h">
+      <Filter>ソース ファイル\VoxelValueStatistics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Hu3DMomentInvariants\Hu3DMomentInvariants.h">
+      <Filter>ソース ファイル\Hu3DMomentInvariants</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Hu3DMomentInvariants\Hu3DMomentInvariants.private.h">
+      <Filter>ソース ファイル\Hu3DMomentInvariants</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Utilities\AddOffsetToVoxelValue.h">
+      <Filter>ソース ファイル\Utilities\a</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Utilities\ConvertIntBoxToLasterPosition.h">
+      <Filter>ソース ファイル\Utilities\c</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Utilities\CalculatingVoxels.h">
+      <Filter>ソース ファイル\Utilities\c</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Utilities\Check3DPositionedVoxelValuePresense.h">
+      <Filter>ソース ファイル\Utilities\c</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Utilities\CheckRasterPositionedVoxelValuePresense.h">
+      <Filter>ソース ファイル\Utilities\c</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Utilities\DividedCalculatingVoxels.h">
+      <Filter>ソース ファイル\Utilities\d</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Utilities\GetMinMaxOfVoxelValue.h">
+      <Filter>ソース ファイル\Utilities\g</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Utilities\IntegralVolume.h">
+      <Filter>ソース ファイル\Utilities\i</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Utilities\SumIntensityOfVoxelsInIntBoxByIntegral.h">
+      <Filter>ソース ファイル\Utilities\s</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Utilities\SumIntensityOfGivenVoxels.h">
+      <Filter>ソース ファイル\Utilities\s</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Utilities\SumIntensityOfVoxelsInIntBox.h">
+      <Filter>ソース ファイル\Utilities\s</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Utilities\SetIntRadInVolKernel.h">
+      <Filter>ソース ファイル\Utilities\s</Filter>
+    </ClInclude>
+    <ClInclude Include="source\HaarFeaturesByIntegral\HaarFeaturesByIntegral.h">
+      <Filter>ソース ファイル\HaarFeaturesByIntegral</Filter>
+    </ClInclude>
+    <ClInclude Include="source\HaarFeaturesByIntegral\HaarFeaturesByIntegral.private.h">
+      <Filter>ソース ファイル\HaarFeaturesByIntegral</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Utilities\BoundingBoxOfVolKernel.h">
+      <Filter>ソース ファイル\Utilities\b</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CurvatureFeatures\Curvatures.h">
+      <Filter>ソース ファイル\CurvatureFeatures</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CurvatureFeatures\Curvatures.static.h">
+      <Filter>ソース ファイル\CurvatureFeatures</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CurvatureFeatures\CurvatureFeatures.h">
+      <Filter>ソース ファイル\CurvatureFeatures</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Utilities\ConvertMaskToCalculatingVoxels.h">
+      <Filter>ソース ファイル\Utilities\c</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\Hu3DMomentInvariants\CalculateHu3DMoments.cpp">
+      <Filter>ソース ファイル\Hu3DMomentInvariants</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaarFeatures\CalculateSingleHaarFeatureInIntBox.cpp">
+      <Filter>ソース ファイル\HaarFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Hu3DMomentInvariants\CalculateInvariantsFromHu3DMoments.cpp">
+      <Filter>ソース ファイル\Hu3DMomentInvariants</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Hu3DMomentInvariants\CalculateHu3DMomentInvariants.cpp">
+      <Filter>ソース ファイル\Hu3DMomentInvariants</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaralickFeatures\CalculateCoOccurenceMatrix.cpp">
+      <Filter>ソース ファイル\HaralickFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaralickFeatures\CalculateHaralickFeatures.cpp">
+      <Filter>ソース ファイル\HaralickFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaralickFeatures\NewDeleteVolumeHaralickCalculation.cpp">
+      <Filter>ソース ファイル\HaralickFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaralickFeatures\CalculateHaralickFeaturesFromCoOccurenceMatrix.cpp">
+      <Filter>ソース ファイル\HaralickFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaralickFeatures\GetVolumeOfHaralickFeatures.cpp">
+      <Filter>ソース ファイル\HaralickFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaralickFeatures\GetVolumeOfHaralickFeatures_MT.cpp">
+      <Filter>ソース ファイル\HaralickFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="source\VoxelValueStatistics\CalculateVoxelValueStatistics.cpp">
+      <Filter>ソース ファイル\VoxelValueStatistics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\VoxelValueStatistics\GetVolumeOfVoxelValueStatistics.cpp">
+      <Filter>ソース ファイル\VoxelValueStatistics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\VoxelValueStatistics\GetVolumeOfVoxelValueStatistics_MT.cpp">
+      <Filter>ソース ファイル\VoxelValueStatistics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utilities\AddOffsetToVoxelValue.cpp">
+      <Filter>ソース ファイル\Utilities\a</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utilities\CalculatingVoxels.cpp">
+      <Filter>ソース ファイル\Utilities\c</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utilities\Check3DPositionedVoxelValuePresense.cpp">
+      <Filter>ソース ファイル\Utilities\c</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utilities\CheckRasterPositionedVoxelValuePresense.cpp">
+      <Filter>ソース ファイル\Utilities\c</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utilities\ConvertIntBoxToLasterPosition.cpp">
+      <Filter>ソース ファイル\Utilities\c</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utilities\DividedCalculatingVoxels.cpp">
+      <Filter>ソース ファイル\Utilities\d</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utilities\GetMinMaxOfVoxelValue.cpp">
+      <Filter>ソース ファイル\Utilities\g</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utilities\IntegralVolume.cpp">
+      <Filter>ソース ファイル\Utilities\i</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utilities\SumIntensityOfGivenVoxels.cpp">
+      <Filter>ソース ファイル\Utilities\s</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utilities\SumIntensityOfVoxelsInIntBox.cpp">
+      <Filter>ソース ファイル\Utilities\s</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utilities\SumIntensityOfVoxelsInIntBoxByIntegral.cpp">
+      <Filter>ソース ファイル\Utilities\s</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utilities\SetIntRadInVolKernel.cpp">
+      <Filter>ソース ファイル\Utilities\s</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Hu3DMomentInvariants\GetVolumeOfHu3DMomentInvariants.cpp">
+      <Filter>ソース ファイル\Hu3DMomentInvariants</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Hu3DMomentInvariants\GetVolumeOfHu3DMomentInvariants_MT.cpp">
+      <Filter>ソース ファイル\Hu3DMomentInvariants</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaarFeatures\CalculateMultiHaarFeatures.cpp">
+      <Filter>ソース ファイル\HaarFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaarFeatures\CalculateSingleHaarFeature.cpp">
+      <Filter>ソース ファイル\HaarFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaarFeatures\GetVolumeOfMultiHaarFeatures.cpp">
+      <Filter>ソース ファイル\HaarFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaarFeatures\GetVolumeOfMultiHaarFeatures_MT.cpp">
+      <Filter>ソース ファイル\HaarFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaarFeatures\GetVolumeOfSingleHaarFeature.cpp">
+      <Filter>ソース ファイル\HaarFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaarFeatures\GetVolumeOfSingleHaarFeature_MT.cpp">
+      <Filter>ソース ファイル\HaarFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaarFeaturesByIntegral\CalculateSigngleHaarFeatureInIntBoxByIntegral.cpp">
+      <Filter>ソース ファイル\HaarFeaturesByIntegral</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaarFeaturesByIntegral\GetVolumeOfMultiHaarFeaturesByIntegral.cpp">
+      <Filter>ソース ファイル\HaarFeaturesByIntegral</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaarFeaturesByIntegral\GetVolumeOfMultiHaarFeaturesByIntegral_MT.cpp">
+      <Filter>ソース ファイル\HaarFeaturesByIntegral</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaarFeaturesByIntegral\GetVolumeOfSingleHaarFeatureByIntegral.cpp">
+      <Filter>ソース ファイル\HaarFeaturesByIntegral</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaarFeaturesByIntegral\GetVolumeOfSingleHaarFeatureByIntegral_MT.cpp">
+      <Filter>ソース ファイル\HaarFeaturesByIntegral</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaarFeaturesByIntegral\CalculateSigngleHaarFeatureByIntegral.cpp">
+      <Filter>ソース ファイル\HaarFeaturesByIntegral</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utilities\BoundingBoxOfVolKernel.cpp">
+      <Filter>ソース ファイル\Utilities\b</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CurvatureFeatures\CalculateCurvatureFeatures.cpp">
+      <Filter>ソース ファイル\CurvatureFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CurvatureFeatures\Curvatures.cpp">
+      <Filter>ソース ファイル\CurvatureFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CurvatureFeatures\GetVolumeOfCurvatureFeatures.cpp">
+      <Filter>ソース ファイル\CurvatureFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CurvatureFeatures\GetVolumeOfCurvatureFeatures_MT.cpp">
+      <Filter>ソース ファイル\CurvatureFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaarFeaturesByIntegral\GetVolumeOfMultiHaarFeaturesFromIntegral_MT.cpp">
+      <Filter>ソース ファイル\HaarFeaturesByIntegral</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaarFeaturesByIntegral\CalculateMultiHaarFeatureByIntegral.cpp">
+      <Filter>ソース ファイル\HaarFeaturesByIntegral</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaarFeaturesByIntegral\CalculateMultiHaarFeatureByIntegral_forVoxelSubset.cpp">
+      <Filter>ソース ファイル\HaarFeaturesByIntegral</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaarFeaturesByIntegral\CalculateMultiHaarFeaturesAtVoxelsByIntegral.cpp">
+      <Filter>ソース ファイル\HaarFeaturesByIntegral</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utilities\ConvertMaskToCalculatingVoxels.cpp">
+      <Filter>ソース ファイル\Utilities\c</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HaarFeaturesByIntegral\CalculateMultiHaarFeaturesAtMultiPositionsByIntegral_MT.cpp">
+      <Filter>ソース ファイル\HaarFeaturesByIntegral</Filter>
+    </ClCompile>
+    <ClCompile Include="source\VoxelValueStatistics\SetCalculatedStatisticsAsVoxelValue.cpp">
+      <Filter>ソース ファイル\VoxelValueStatistics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\VoxelValueStatistics\MemorySetOfVoxelValueStatisticsAtMultiPositions.cpp">
+      <Filter>ソース ファイル\VoxelValueStatistics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\VoxelValueStatistics\CalculateVoxelValueStatisticsAtMultiPositions_MT.cpp">
+      <Filter>ソース ファイル\VoxelValueStatistics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Hu3DMomentInvariants\CalculateHu3DMomentInvariantsAtMultiPositions_MT.cpp">
+      <Filter>ソース ファイル\Hu3DMomentInvariants</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CurvatureFeatures\CalculateCurvatureFeaturesAtMultiPositions_MT.cpp">
+      <Filter>ソース ファイル\CurvatureFeatures</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
