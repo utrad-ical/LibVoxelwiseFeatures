@@ -141,7 +141,7 @@
     </ClCompile>
     <Lib>
       <AdditionalDependencies>pthreadVC2.lib;VOL-1.2.lib;</AdditionalDependencies>
-      <OutputFile>library\$(platform)\LibVoxelwiseFeatures-1.0.lib</OutputFile>
+      <OutputFile>library\$(platform)\LibVoxelwiseFeatures_1.0.lib</OutputFile>
       <AdditionalLibraryDirectories>..\includes\pthreads_x64\lib;..\includes\VOL-1.2\library\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
