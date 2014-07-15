@@ -6,11 +6,14 @@
 #include "../Utilities/CalculatingVoxels.h"
 
 
-#define NUM_CURVATURE_FEATURES	4
+//#define NUM_CURVATURE_FEATURES	4
+#define NUM_CURVATURE_FEATURES	9
 // [0]: Gaussian-Curvature
 // [1]: Mean-Curvature
 // [2]: Shape-Index
 // [3]: Curvedness
+// [4~6]: Eigen Values of Hessian (l1, l2, l3)
+// [7~8]: Principal Curvatures (k1, k2)
 
 
 float* CalculateCurvatureFeatures(VOL_RAWVOLUMEDATA* input, int ch, VOL_INTVECTOR3D* coord);

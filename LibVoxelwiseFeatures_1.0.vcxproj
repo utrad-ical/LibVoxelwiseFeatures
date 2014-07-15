@@ -214,6 +214,7 @@
     <ClCompile Include="source\Utilities\AddOffsetToVoxelValue.cpp" />
     <ClCompile Include="source\Utilities\BoundingBoxOfVolKernel.cpp" />
     <ClCompile Include="source\Utilities\ConvertMaskToCalculatingVoxels.cpp" />
+    <ClCompile Include="source\Utilities\EigenCalc.cpp" />
     <ClCompile Include="source\Utilities\SetIntRadInVolKernel.cpp" />
     <ClCompile Include="source\Utilities\SumIntensityOfGivenVoxels.cpp" />
     <ClCompile Include="source\Utilities\CalculatingVoxels.cpp" />

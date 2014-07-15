@@ -24,7 +24,6 @@ VOL_RAWVOLUMEDATA* GetVolumeOfCurvatureFeatures(
 	}
 	printf("b,");
 
-//	CALCULATINGVOXELS* subset = NewCalculatingVoxels(mask, mChannel);
 	CALCULATINGVOXELS* subset = ConvertMaskToCalculatingVoxels(mask, mChannel);
 	printf("c,");
 
