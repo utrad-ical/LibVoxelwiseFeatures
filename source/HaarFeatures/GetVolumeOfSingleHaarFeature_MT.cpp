@@ -41,13 +41,13 @@ VOL_RAWVOLUMEDATA* GetVolumeOfSingleHaarFeature_MT(
 
 	VOL_RAWVOLUMEDATA* output = VOL_NewSingleChannelRawVolumeData(size3d, VOL_VALUEUNIT_FLOAT32, VOL_VALUETYPE_SINGLE);
 
-	int margin = SetIntRadInVolKernel(roi);
-	VOL_AttachOffsetXYZ(volume, margin, VOL_RESIZE_BACKGROUNDTYPE_BORDERCOPY_UNIFORM);
-
 	DIVIDEDCALCULATINGVOXELS* divs = NewDividedCalculatingVoxelsFromMask(mask, mChannel, numThreads);
 //	for(int t=0; t<numThreads; t++) {
 //		ConvertPositions1DTo3DCalculatingVoxels(divs->set[t]);
 //	}
+
+	int margin = SetIntRadInVolKernel(roi);
+	VOL_AttachOffsetXYZ(volume, margin, VOL_RESIZE_BACKGROUNDTYPE_BORDERCOPY_UNIFORM);
 
 	THREADING_HAARFEATUREVOLUME** t_args = new THREADING_HAARFEATUREVOLUME* [numThreads];
 	for(int t=0; t<numThreads; t++) {

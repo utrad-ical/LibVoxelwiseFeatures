@@ -28,9 +28,10 @@ THREADING_HAARFEATUREVOLUME;
 void* threaded_GetVolumeOfMultiHaarFeaturesInRoiBoundingBox(void* args)
 {
 	THREADING_HAARFEATUREVOLUME* a = (THREADING_HAARFEATUREVOLUME*)args;
-	float**** featvol = (float****)a->output->array4D;
+//	float**** featvol = (float****)a->output->array4D;
 	for(int idx=0; idx<NUM_HAAR_FEATURES; idx++) {
-		CalculateSingleHaarFeature_forVoxelSubset(a->input, a->ch, a->subset, a->kernel, idx, featvol[idx]);
+		float*** featvol = (float***)a->output->array4D[idx];
+		CalculateSingleHaarFeature_forVoxelSubset(a->input, a->ch, a->subset, a->kernel, idx, featvol); // featvol[idx]);
 	}
 	return NULL;
 }
@@ -46,13 +47,13 @@ VOL_RAWVOLUMEDATA* GetVolumeOfMultiHaarFeatures_MT(
 		VOL_DuplicateChannelOfRawVolumeData(output, 0);
 	}
 
-	int margin = SetIntRadInVolKernel(roi);
-	VOL_AttachOffsetXYZ(volume, margin, VOL_RESIZE_BACKGROUNDTYPE_BORDERCOPY_UNIFORM);
-
 	DIVIDEDCALCULATINGVOXELS* divs = NewDividedCalculatingVoxelsFromMask(mask, mChannel, numThreads);
 //	for(int t=0; t<numThreads; t++) {
 //		ConvertPositions1DTo3DCalculatingVoxels(divs->set[t]);
 //	}
+
+	int margin = SetIntRadInVolKernel(roi);
+	VOL_AttachOffsetXYZ(volume, margin, VOL_RESIZE_BACKGROUNDTYPE_BORDERCOPY_UNIFORM);
 
 	THREADING_HAARFEATUREVOLUME** t_args = new THREADING_HAARFEATUREVOLUME* [numThreads];
 	for(int t=0; t<numThreads; t++) {

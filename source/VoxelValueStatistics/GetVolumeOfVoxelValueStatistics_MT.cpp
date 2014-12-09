@@ -7,6 +7,23 @@
 #include "VoxelValueStatistics.h"
 #include "VoxelValueStatistics.private.h"
 
+/*
+#include "float.h"
+#define NUM_DATA(v)  v->matrixSize->depth*v->matrixSize->height*v->matrixSize->width
+
+void SetValueOutsideMaskVolumes(VOL_RAWVOLUMEDATA* dest, int dch, VOL_RAWVOLUMEDATA* mask, int mch, float value)
+{
+	if(NUM_DATA(dest)!=NUM_DATA(mask))	return;
+
+	float* ddata = (float*)dest->data[dch];
+	unsigned char* mdata = (unsigned char*)mask->data[mch];
+	for(int i=0; i<NUM_DATA(dest); i++) {
+		if(!mdata[i])	ddata[i] = value;
+	}
+
+	return;
+}
+*/
 
 //void CalculateStatistics_SubsetOfVoxels(
 //	VOL_RAWVOLUMEDATA* input, int ch, VOL_RAWVOLUMEDATA* output, CALCULATINGVOXELS* subset, VOL_KERNEL* kernel)
@@ -86,11 +103,18 @@ VOL_RAWVOLUMEDATA* GetVolumeOfVoxelValueStatistics_MT(
 //	DeleteCalculatingVoxels(subset);
 //	printf("g\n");
 
+
+//	for(int c=0; c<output->matrixSize->channel; c++) {
+//		SetValueOutsideMaskVolumes(output, c, mask, mChannel, FLT_MAX);
+//	}
+
 	return output;
 }
 
 	
 	
+
+
 
 
 

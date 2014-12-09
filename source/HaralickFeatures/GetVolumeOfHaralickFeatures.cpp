@@ -9,7 +9,11 @@
 void CalculateHaralickFeatures_SubsetOfVoxels(
 	VOL_RAWVOLUMEDATA* output, VOLUMEHARALICKCALCULATION* volumeH, CALCULATINGVOXELS* subset, VOL_KERNEL* roi, VOL_KERNEL* references)
 {
-	float**** featvol = (float****)output->array4D;
+//	float**** featvol = (float****)output->array4D;
+	float**** featvol = new float*** [NUM_HARALICK_FEATURES];
+	for(int j=0; j<NUM_HARALICK_FEATURES; j++) {
+		featvol[j] = (float***)output->array4D[j];
+	}
 
 	VOL_INTVECTOR3D coord;
 	for(int i=0; i<subset->num; i++) {
@@ -22,6 +26,8 @@ void CalculateHaralickFeatures_SubsetOfVoxels(
 
 		delete [] temp;
 	}
+
+	delete [] featvol;
 
 	return;
 }

@@ -20,7 +20,12 @@ VOL_RAWVOLUMEDATA* GetVolumeOfHu3DMomentInvariants(
 	kernel->intRad = margin;
 	VOL_AttachOffsetXYZ(volume, margin, VOL_RESIZE_BACKGROUNDTYPE_BORDERCOPY_UNIFORM);
 
-	float**** outvol = (float****)outvolume->array4D;
+//	float**** outvol = (float****)outvolume->array4D;
+	float*** vol_j1 = (float***)outvolume->array4D[0];
+	float*** vol_j2 = (float***)outvolume->array4D[1];
+	float*** vol_delta = (float***)outvolume->array4D[2];
+	float*** vol_i1 = (float***)outvolume->array4D[3];
+	float*** vol_i2 = (float***)outvolume->array4D[4];
 
 	VOL_INTVECTOR3D p_org, p_add;
 
@@ -39,11 +44,11 @@ VOL_RAWVOLUMEDATA* GetVolumeOfHu3DMomentInvariants(
 
 				HU3DMOMENTINVARIANTS invs = CalculateHu3DMomentInvariants(volume, channel, &p_add, kernel);
 
-				outvol[0][p_org.z][p_org.y][p_org.x] = invs.J1;
-				outvol[1][p_org.z][p_org.y][p_org.x] = invs.J2;
-				outvol[2][p_org.z][p_org.y][p_org.x] = invs.delta;
-				outvol[3][p_org.z][p_org.y][p_org.x] = invs.I1;
-				outvol[4][p_org.z][p_org.y][p_org.x] = invs.I2;
+				vol_j1[p_org.z][p_org.y][p_org.x] = invs.J1;
+				vol_j2[p_org.z][p_org.y][p_org.x] = invs.J2;
+				vol_delta[p_org.z][p_org.y][p_org.x] = invs.delta;
+				vol_i1[p_org.z][p_org.y][p_org.x] = invs.I1;
+				vol_i2[p_org.z][p_org.y][p_org.x] = invs.I2;
 			}}
 		}
 	}

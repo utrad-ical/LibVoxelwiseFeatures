@@ -69,6 +69,8 @@ float** CalculateCurvatureFeaturesAtMultiPositions_MT(
 	VOL_RAWVOLUMEDATA* vtemp = VOL_ExtractSingleChannelRawVolumeData(volume, channel);
 	VOL_AttachOffsetXYZ(vtemp, OFFSET_XYZ, VOL_RESIZE_BACKGROUNDTYPE_BORDERCOPY_UNIFORM);
 
+	VOL_ConvertVoxelUnit(vtemp, 0, VOL_VALUEUNIT_FLOAT32, NULL, NULL, VOL_CONVERTUNIT_TYPE_DIRECT);
+
 	DIVIDEDCALCULATINGVOXELS* divs = NewDividedCalculatingVoxels(subset, nthreads);
 
 	THREADING_CURVATUREFEATURES** t_args = new THREADING_CURVATUREFEATURES* [nthreads];
