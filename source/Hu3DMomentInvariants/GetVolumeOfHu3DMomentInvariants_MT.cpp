@@ -12,7 +12,12 @@
 void regional_GetVolumeOfHu3DMomentInvariants(
 	VOL_RAWVOLUMEDATA* input, int ich, VOL_KERNEL* kernel, CALCULATINGVOXELS* targets, VOL_RAWVOLUMEDATA* output)
 {
-	float**** outvol = (float****)output->array4D;
+//	float**** outvol = (float****)output->array4D;
+	float*** vol_j1 = (float***)output->array4D[0];
+	float*** vol_j2 = (float***)output->array4D[1];
+	float*** vol_delta = (float***)output->array4D[2];
+	float*** vol_i1 = (float***)output->array4D[3];
+	float*** vol_i2 = (float***)output->array4D[4];
 
 	VOL_INTVECTOR3D p;
 
@@ -23,11 +28,11 @@ void regional_GetVolumeOfHu3DMomentInvariants(
 
 		HU3DMOMENTINVARIANTS invs = CalculateHu3DMomentInvariants(input, ich, &p, kernel);
 
-		outvol[0][p.z][p.y][p.x] = invs.J1;
-		outvol[1][p.z][p.y][p.x] = invs.J2;
-		outvol[2][p.z][p.y][p.x] = invs.delta;
-		outvol[3][p.z][p.y][p.x] = invs.I1;
-		outvol[4][p.z][p.y][p.x] = invs.I2;
+		vol_j1[p.z][p.y][p.x] = invs.J1;
+		vol_j2[p.z][p.y][p.x] = invs.J2;
+		vol_delta[p.z][p.y][p.x] = invs.delta;
+		vol_i1[p.z][p.y][p.x] = invs.I1;
+		vol_i2[p.z][p.y][p.x] = invs.I2;
 	}
 
 	return;

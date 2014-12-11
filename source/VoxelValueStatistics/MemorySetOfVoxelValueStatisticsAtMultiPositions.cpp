@@ -7,8 +7,6 @@
 void MemorySetOfVoxelValueStatisticsAtMultiPositions(
 	VOL_RAWVOLUMEDATA* input, int ch, CALCULATINGVOXELS* subset, VOL_KERNEL* kernel, float** output)
 {
-//	float**** features = (float****)output->array4D;
-
 	VOL_INTVECTOR3D coord;
 	
 	for(int i=0; i<subset->num; i++) {

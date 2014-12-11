@@ -10,12 +10,9 @@ void CalculateSingleHaarFeature_forVoxelSubset(
 {
 //	float*** feature = (float***)output->array4D[0];
 
-	VOL_INTVECTOR3D coord;
-	
 	for(int i=0; i<subset->num; i++) {
 
-	//	if(i%100==0)	printf("i%d,", i);
-		
+		VOL_INTVECTOR3D coord;
 		coord.x = subset->xc[i]+kernel->intRad;
 		coord.y = subset->yc[i]+kernel->intRad;
 		coord.z = subset->zc[i]+kernel->intRad;
@@ -39,11 +36,10 @@ VOL_RAWVOLUMEDATA* GetVolumeOfSingleHaarFeature(
 
 	VOL_RAWVOLUMEDATA* output = VOL_NewSingleChannelRawVolumeData(size3d, VOL_VALUEUNIT_FLOAT32, VOL_VALUETYPE_SINGLE);
 
+	CALCULATINGVOXELS* subset = ConvertMaskToCalculatingVoxels(mask, mChannel);
+
 	int margin = SetIntRadInVolKernel(roi);
 	VOL_AttachOffsetXYZ(volume, margin, VOL_RESIZE_BACKGROUNDTYPE_BORDERCOPY_UNIFORM);
-
-//	CALCULATINGVOXELS* subset = NewCalculatingVoxels(mask, mChannel);
-	CALCULATINGVOXELS* subset = ConvertMaskToCalculatingVoxels(mask, mChannel);
 
 	float*** featvol = (float***)output->array4D[0];
 	CalculateSingleHaarFeature_forVoxelSubset(volume, vChannel, subset, roi, index, featvol);

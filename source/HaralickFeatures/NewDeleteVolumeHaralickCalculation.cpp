@@ -23,6 +23,7 @@ VOLUMEHARALICKCALCULATION* NewVolumeHaralickCalculation(
 
 	SetIntRadInVolKernel(roi);
 	SetIntRadInVolKernel(references);
+	printf("roi->intRad(%d)+references->intRad(%d),", roi->intRad,references->intRad);
 
 	output->margin = roi->intRad+references->intRad;
 	output->numGradation = numGradation;

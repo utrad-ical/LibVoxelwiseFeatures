@@ -10,9 +10,10 @@ void* threaded_GetVolumeOfMultiHaarFeaturesByIntegral(void* args)
 {
 	THREADING_VOLUMEHAARFEATURES* a = (THREADING_VOLUMEHAARFEATURES*)args;
 
-	float**** features = (float****)a->output->array4D;
+//	float**** features = (float****)a->output->array4D;
 	for(int idx=0; idx<NUM_HAAR_FEATURES; idx++) {
-		CalculateSingleHaarFeatureByIntegral_forVoxelSubset(a->integral, a->subset, a->roi, idx, features[idx]);
+		float*** tmpfeat = (float***)a->output->array4D[idx];
+		CalculateSingleHaarFeatureByIntegral_forVoxelSubset(a->integral, a->subset, a->roi, idx, tmpfeat); // features[idx]);
 	}
 	return NULL;
 }

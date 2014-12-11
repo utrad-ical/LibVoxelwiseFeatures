@@ -8,6 +8,8 @@ float CalculateSingleHaarFeature(
 	VOL_RAWVOLUMEDATA* volume, int channel, VOL_INTVECTOR3D* coord, VOL_KERNEL* roi, int index)
 {
 	VOL_INTBOX3D* box = BoundingBoxOfVolKernel(coord, roi);
+//	printf("calcbox{(%d,%d,%d),[%d,%d,%d]}, ", 
+//		box->origin->x,box->origin->y,box->origin->z,box->size->width,box->size->height,box->size->depth);
 
 	if(box->origin->x<0 || box->origin->x+box->size->width>volume->matrixSize->width ||
 		box->origin->y<0 || box->origin->y+box->size->height>volume->matrixSize->height ||

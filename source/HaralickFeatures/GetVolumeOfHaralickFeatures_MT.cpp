@@ -27,11 +27,46 @@ void* threaded_GetVolumeOfHaralickFeatures(void* args)
 	return NULL;
 }
 
+/*
+template <class C>
+void t_SetValueForVolMargins(C*** vol, int xe, int ye, int ze, int margin, C value)
+{
+	for(int k=0; k<ze; k++) { for(int j=0; j<ye; j++) { for(int i=0; i<xe; i++) {
+	if(k<margin || k>=ze-margin || j<margin || j>=ye-margin || i<margin || i>=xe-margin ) { 
+		vol[k][j][i] = value;
+	}}}}
+	return;
+}
+
+void SetValueForVolumeMarginVoxels(VOL_RAWVOLUMEDATA* vol, int ch, int margin, int value)
+{
+	int xe=vol->matrixSize->width, ye=vol->matrixSize->height, ze=vol->matrixSize->depth;
+	if(vol->voxelUnit[ch]==0) {
+		t_SetValueForVolMargins((unsigned char***)vol->array4D[ch], xe, ye, ze, margin, (unsigned char)value);
+	} else if(vol->voxelUnit[ch]==1) {
+		t_SetValueForVolMargins((char***)vol->array4D[ch], xe, ye, ze, margin, (char)value);
+	} else if(vol->voxelUnit[ch]==2) {
+		t_SetValueForVolMargins((unsigned short***)vol->array4D[ch], xe, ye, ze, margin, (unsigned short)value);
+	} else if(vol->voxelUnit[ch]==3) {
+		t_SetValueForVolMargins((short***)vol->array4D[ch], xe, ye, ze, margin, (short)value);
+	}
+	return;
+}
+*/
+
 
 VOL_RAWVOLUMEDATA* GetVolumeOfHaralickFeatures_MT(
 	VOL_RAWVOLUMEDATA* volume, int vChannel, VOL_RAWVOLUMEDATA* mask, int mChannel, 
 	VOL_VALUERANGE* range, int numGradation, VOL_KERNEL* roi, VOL_KERNEL* references, int numThreads)
 {
+	int margin = SetIntRadInVolKernel(roi);
+	margin += SetIntRadInVolKernel(references);
+
+//	VOL_RAWVOLUMEDATA* vtmp = VOL_ExtractSingleChannelRawVolumeData(volume, vChannel);
+//	VOL_AddNewChannelOfRawVolumeData(vtmp, mask, mChannel);
+//	VOL_AttachOffsetXYZ(vtmp, margin, VOL_RESIZE_BACKGROUNDTYPE_BORDERCOPY_UNIFORM);
+//	SetValueForVolumeMarginVoxels(vtmp, 1, margin, 0);
+
 	VOL_INTSIZE3D* size = VOL_GetIntSize3DFromIntSize4D(volume->matrixSize);
 
 	VOL_RAWVOLUMEDATA* output = VOL_NewSingleChannelRawVolumeData(size, VOL_VALUEUNIT_FLOAT32, VOL_VALUETYPE_SINGLE);
@@ -41,14 +76,10 @@ VOL_RAWVOLUMEDATA* GetVolumeOfHaralickFeatures_MT(
 
 	VOLUMEHARALICKCALCULATION* volumeH;
 	volumeH = NewVolumeHaralickCalculation(volume, vChannel, range, numGradation, roi, references);
-
-//	CALCULATINGVOXELS* area = NewCalculatingVoxels(mask, mChannel);
-//	ConvertPositions1DTo3DCalculatingVoxels(area);
+	VOL_INTSIZE4D* tsz = ((VOL_RAWVOLUMEDATA*)volumeH->vol)->matrixSize;
+	printf("margin_h=%d,sz(%d,%d,%d),",volumeH->margin,tsz->width,tsz->height,tsz->depth);
 
 	DIVIDEDCALCULATINGVOXELS* divs = NewDividedCalculatingVoxelsFromMask(mask, mChannel, numThreads);
-//	for(int t=0; t<numThreads; t++) {
-//		ConvertPositions1DTo3DCalculatingVoxels(divs->set[t]);
-//	}
 
 	THREADING_HARALICKVOLUME** t_args = new THREADING_HARALICKVOLUME* [numThreads];
 	for(int t=0; t<numThreads; t++) {
