@@ -15,13 +15,22 @@ typedef struct _bouding_box_ {
 	int top[3], tail[3];
 } BOUNDING_BOX;
 
-BOUNDING_BOX BoundingBoxOfSamplePositions(int num_sample, int** sample_positions)
+BOUNDING_BOX BoundingBoxOfSamplePositions(CALCULATINGVOXELS* samples)
+	// int num_sample, int** sample_positions)
 {
 	BOUNDING_BOX box;
-	for(int c=0; c<3; c++)	box.top[c] = box.tail[c] = sample_positions[0][c];
-	for(int i=0; i<num_sample; i++) for(int c=0; c<3; c++) {
-		if(box.top[c]>sample_positions[i][c])	box.top[c] = sample_positions[i][c];
-		if(box.tail[c]<sample_positions[i][c])	box.tail[c] = sample_positions[i][c];
+	// for(int c=0; c<3; c++)	box.top[c] = box.tail[c] = sample_positions[0][c];
+	box.top[0] = box.tail[0] = samples->xc[0];
+	box.top[1] = box.tail[1] = samples->yc[0];
+	box.top[2] = box.tail[2] = samples->zc[0];
+	
+	int p_tmp[3];
+	for(int i=0; i<samples->num; i++) for(int c=0; c<3; c++) {
+		p_tmp[0] = samples->xc[i];
+		p_tmp[1] = samples->yc[i];
+		p_tmp[2] = samples->zc[i];
+		if(box.top[c]>p_tmp[c])		box.top[c] = p_tmp[c];
+		if(box.tail[c]<p_tmp[c])	box.tail[c] = p_tmp[c];
 	}
 	return box;
 }
@@ -109,7 +118,8 @@ float** GetEquallySpacedPointsOnUnitSphere(int num)
 		vectors[16][0] = 1.37638f;		vectors[16][1] = 1.0f;			vectors[16][2] = -2.22703f;
 		vectors[17][0] = -0.525731f;	vectors[17][1] = 1.61803f;		vectors[17][2] = -2.22703f;
 		vectors[18][0] = -1.7013f;		vectors[18][1] = 0.0f;			vectors[18][2] = -2.22703f;
-		vectors[19][0] = -0.525731f;	vectors[19][1] = -1.61803f;		vectors[19][2] = -2.22703f;		break;
+		vectors[19][0] = -0.525731f;	vectors[19][1] = -1.61803f;		vectors[19][2] = -2.22703f;
+		break;
 	}
 
 	for(int i=0; i<num; i++) {
@@ -123,21 +133,22 @@ float** GetEquallySpacedPointsOnUnitSphere(int num)
 }
 
 
-SIFT3D_FEATURES* CalculateSift3D_MultiPositions(
-	VOL_RAWVOLUMEDATA* volume, int ch_v, int num_sample, int** sample_positions, 
+SIFT_3D_FEATURES* CalculateSift3D_MultiPositions(
+	VOL_RAWVOLUMEDATA* volume, int ch_v, CALCULATINGVOXELS* samples, // int num_sample, int** sample_positions, 
 	int roi_size, int num_roi_division, int num_angle)
 {
 	VOL_INTSIZE3D* size = VOL_GetIntSize3DFromIntSize4D(volume->matrixSize);
 	int num_feats = num_roi_division*num_roi_division*num_roi_division*num_angle;
 
-	SIFT3D_FEATURES* fout = NewSift3dFeatures(num_sample, num_feats);
+	fprintf(stderr, "a,");
+	SIFT_3D_FEATURES* fout = NewSift3dFeatures(samples->num, num_feats);
 
-	char bool_add_margin = 0;
-
-	BOUNDING_BOX box = BoundingBoxOfSamplePositions(num_sample, sample_positions);
+	fprintf(stderr, "b,");
+	BOUNDING_BOX box = BoundingBoxOfSamplePositions(samples);
 	int volsz3d[3];
 	volsz3d[0] = WID(volume);	volsz3d[1] = HEI(volume);	volsz3d[2] = DEP(volume);
 
+	fprintf(stderr, "c,");
 	int margin = 0;
 	for(int c=0; c<3; c++) {
 		box.top[c] -= roi_size/2;
@@ -146,31 +157,44 @@ SIFT3D_FEATURES* CalculateSift3D_MultiPositions(
 		if(margin<box.tail[c]-volsz3d[c]+1)		margin = box.tail[c]-volsz3d[c]+1;
 	}
 
+	fprintf(stderr, "d,");
 	VOL_RAWVOLUMEDATA* input_vol = VOL_ExtractSingleChannelRawVolumeData(volume, ch_v);
 	
 	if(margin>0) {
+		fprintf(stderr, "add_m,");
 		VOL_AttachOffsetXYZ(input_vol, margin, VOL_RESIZE_BACKGROUNDTYPE_BORDERCOPY_UNIFORM);
-		for(int i=0; i<num_sample; i++) for(int c=0; c<3; c++) {
-			sample_positions[i][c] += margin;
+		for(int i=0; i<samples->num; i++) {
+			samples->xc[i] += margin;
+			samples->yc[i] += margin;
+			samples->zc[i] += margin;
+			// for(int c=0; c<3; c++) sample_positions[i][c] += margin;
 		}
 	}
 
+	fprintf(stderr, "e,");
 	float** ary_angles = GetEquallySpacedPointsOnUnitSphere(num_angle);
+	int p_tmp[3];
 
-	for(int i=0; i<num_sample; i++) {
-		float* f_tmp = CalculateSift3D_SinglePosition(input_vol, 0, sample_positions[i],
-													  roi_size, num_roi_division, num_angle, ary_angles);
-		memcpy(fout+i*num_feats, f_tmp, sizeof(float)*num_feats);
+	
+	for(int i=0; i<samples->num; i++) {
+	//	fprintf(stderr, "f[%d/%d]:", i,samples->num);
+		p_tmp[0] = samples->xc[i];
+		p_tmp[1] = samples->yc[i];
+		p_tmp[2] = samples->zc[i];
+	//	fprintf(stderr, "(%d,%d,%d),", p_tmp[2],p_tmp[1],p_tmp[0]);
+		float* f_tmp = CalculateSift3D_SinglePosition(input_vol, 0, p_tmp, roi_size, num_roi_division, num_angle, ary_angles);
+		memcpy(fout->feat_array[i], f_tmp, sizeof(float)*num_feats);
 		delete [] f_tmp;
+	//	fprintf(stderr, "calculated_%d\n", i*num_feats);
 	}
-
-
+	
+	fprintf(stderr, "g,");
 	VOL_DeleteRawVolumeData(input_vol);
 
-	if(margin>0) {
-		for(int i=0; i<num_sample; i++) for(int c=0; c<3; c++) {
-			sample_positions[i][c] -= margin;
-		}
+	if(margin>0) for(int i=0; i<samples->num; i++) {
+		samples->xc[i] -= margin;
+		samples->yc[i] -= margin;
+		samples->zc[i] -= margin;
 	}
 
 	delete [] ary_angles[0];

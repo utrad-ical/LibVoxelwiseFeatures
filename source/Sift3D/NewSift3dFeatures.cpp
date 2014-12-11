@@ -6,9 +6,9 @@
 #include "Sift3D.h"
 
 
-SIFT3D_FEATURES* NewSift3dFeatures(int n_sample, int n_feats)
+SIFT_3D_FEATURES* NewSift3dFeatures(int n_sample, int n_feats)
 {
-	SIFT3D_FEATURES* data = new SIFT3D_FEATURES;
+	SIFT_3D_FEATURES* data = new SIFT_3D_FEATURES;
 	data->feat_array = new float* [n_sample];
 	data->feat_array[0] = new float [n_sample*n_feats];
 	memset(data->feat_array[0], 0x00, sizeof(float)*n_sample*n_feats);

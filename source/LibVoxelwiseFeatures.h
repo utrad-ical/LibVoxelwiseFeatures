@@ -33,8 +33,8 @@
 #include "VoxelValueStatistics/VoxelValueStatistics.h"
 
 #include "Utilities/CalculatingVoxels.h"
-#include "Utilitie
-s/IntegralVolume.h"
+#include "Utilities/IntegralVolume.h"
+
 
 #define LIB_VOXELWISE_FEATURES__H
 #endif

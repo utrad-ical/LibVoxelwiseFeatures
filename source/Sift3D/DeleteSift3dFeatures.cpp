@@ -5,7 +5,7 @@
 #include "Sift3D.h"
 
 
-void DeleteSift3dFeatures(SIFT3D_FEATURES* data)
+void DeleteSift3dFeatures(SIFT_3D_FEATURES* data)
 {
 	delete [] data->feat_array[0];
 	delete [] data->feat_array;
