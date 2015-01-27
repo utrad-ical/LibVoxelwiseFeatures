@@ -4,6 +4,7 @@
 #include <cmath>
 #include "VOL.h"
 
+// #define DEBUG_PRINT
 #define	PI	3.141593f
 
 float Inner(float* v1, float* v2, int n)
@@ -24,23 +25,51 @@ float* CalculateSift3D_Primitive(
 
 	for(int t=0; t<num_sampling; t++) {
 		int i=sampling[t][0], j=sampling[t][1], k=sampling[t][2];
-		g[0] = (float)(vol[k][j][i]-vol[k][j][i-1]);
-		g[1] = (float)(vol[k][j][i]-vol[k][j-1][i]);
-		g[2] = (float)(vol[k][j][i]-vol[k-1][j][i]);
+		g[0] = (float)(vol[k][j][i+1]-vol[k][j][i-1]);
+		g[1] = (float)(vol[k][j+1][i]-vol[k][j-1][i]);
+		g[2] = (float)(vol[k+1][j][i]-vol[k-1][j][i]);
+#ifdef DEBUG_PRINT
+		fprintf(stderr, "p[%d,%d,%d]=g(%.2f,%.2f,%.2f); ",i,j,k,g[0],g[1],g[2]);
+#endif
 		if(g[0]==0.0f && g[1]==0.0f && g[2]==0.0f) {
 			out[num_angle] += add_weight;
+#ifdef DEBUG_PRINT
+			fprintf(stderr, "no_grad");
+#endif
 		} else {
 			int i_max = 0;
 			float max_value = Inner(g, angles[0], 3);
+#ifdef DEBUG_PRINT
+			fprintf(stderr, "[0](%.3f,%.3f,%.3f)->%.3f,", angles[0][0],angles[0][1],angles[0][2],max_value);
+#endif
 			for(int i=1; i<num_angle; i++) {
 				float tmp = Inner(g, angles[i], 3);
+#ifdef DEBUG_PRINT
+				fprintf(stderr, "[%d](%.3f,%.3f,%.3f)->%.3f,", i,angles[i][0],angles[i][1],angles[i][2],tmp);
+#endif
 				if(max_value<tmp) {
 					i_max = i;		max_value = tmp;
 				}
+#ifdef DEBUG_PRINT
+				fprintf(stderr, "max_%d(%.3f),", i_max,max_value);
+#endif
 			}
+#ifdef DEBUG_PRINT
+			fprintf(stderr, " out=%d(%.3f),add%.3f", i_max,max_value,add_weight);
+#endif
 			out[i_max] += add_weight;
 		}
+#ifdef DEBUG_PRINT
+		fprintf(stderr, "\n");
+		getchar();
+#endif
 	}
+
+//	for(int i=0; i<=num_angle; i++) {
+//		fprintf(stderr, "[%d]=%.3f, ", i,out[i]);
+//	}
+//	fprintf(stderr, "\n");
+//	getchar();
 
 	return out;
 }
@@ -51,23 +80,33 @@ float* CalculateSift3D_SinglePosition(
 {
 	float** angles = base_angles;
 
-//	fprintf(stderr, "1,");
+#ifdef DEBUG_PRINT
+	fprintf(stderr, "1,");
+#endif
 	int org[3];
 	org[0] = p[0]-roi_size/2;	org[1] = p[1]-roi_size/2;	org[2] = p[2]-roi_size/2;
 
-//	fprintf(stderr, "2,");
+#ifdef DEBUG_PRINT
+	fprintf(stderr, "2,");
+#endif
 	float sz_sub = (float)roi_size/(float)num_roi_division;
 
-//	fprintf(stderr, "3,");
+#ifdef DEBUG_PRINT
+	fprintf(stderr, "3,");
+#endif
 	int n_tmp_roi = ((int)sz_sub+1)*((int)sz_sub+1)*((int)sz_sub+1);
 	int** tmp_roi = new int* [n_tmp_roi];
 	tmp_roi[0] = new int [n_tmp_roi*3];
 	for(int i=0; i<n_tmp_roi; i++)	tmp_roi[i] = tmp_roi[0]+3*i; 
 
-//	fprintf(stderr, "4,");
+#ifdef DEBUG_PRINT
+	fprintf(stderr, "4,");
+#endif
 	float* out = new float [num_angle*num_roi_division*num_roi_division*num_roi_division];
 
-//	fprintf(stderr, "5,");
+#ifdef DEBUG_PRINT
+	fprintf(stderr, "5,");
+#endif
 	int i_top = 0;
 	for(int z=0; z<num_roi_division; z++) {	
 		int sz=(int)((float)z*sz_sub+0.5f);
@@ -79,7 +118,9 @@ float* CalculateSift3D_SinglePosition(
 				int sx=(int)((float)x*sz_sub+0.5f);
 				int ex=(int)((float)(x+1)*sz_sub+0.5f);
 
-			//	fprintf(stderr, "(%d,%d,%d),", z,y,x);
+#ifdef DEBUG_PRINT
+				fprintf(stderr, "(%d,%d,%d),", z,y,x);
+#endif
 				int cnt=0;
 				for(int k=sz; k<ez; k++) for(int j=sy; j<ey; j++) for(int i=sx; i<ex; i++) {
 					tmp_roi[cnt][0] = org[0]+i;
@@ -88,7 +129,9 @@ float* CalculateSift3D_SinglePosition(
 					cnt++;
 				}
 
-			//	fprintf(stderr, "cnt%d,", cnt);
+#ifdef DEBUG_PRINT
+				fprintf(stderr, "cnt%d,", cnt);
+#endif
 				float* tmp_out;
 				switch(volume->voxelUnit[ch]) {
 				case 0:
@@ -116,16 +159,21 @@ float* CalculateSift3D_SinglePosition(
 					tmp_out = CalculateSift3D_Primitive((double***)volume->array4D[ch], cnt, tmp_roi, num_angle, angles);
 					break;
 				}
-			//	fprintf(stderr, ".");
-
+#ifdef DEBUG_PRINT
+				fprintf(stderr, ".");
+#endif
 				memcpy(out+i_top, tmp_out, sizeof(float)*num_angle);
 				i_top += num_angle;
-			//	fprintf(stderr, "%d,", i_top);
+#ifdef DEBUG_PRINT
+				fprintf(stderr, "%d, ", i_top);
+#endif
 	}}}
 
 	delete [] tmp_roi[0];
 	delete [] tmp_roi;
-	
+#ifdef DEBUG_PRINT
+	fprintf(stderr, "ok\n");
+#endif
 	return out;
 }
 

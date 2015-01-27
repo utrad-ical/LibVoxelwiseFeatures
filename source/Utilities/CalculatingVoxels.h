@@ -23,6 +23,8 @@ CALCULATINGVOXELS* NewCalculatingVoxels(int num);
 void DeleteCalculatingVoxels(CALCULATINGVOXELS* data);
 CALCULATINGVOXELS* DuplicateCalculatingVoxels(CALCULATINGVOXELS* data);
 
+int CalculatingVoxels_AttachOffsetXYZ(CALCULATINGVOXELS* data, int* orgsize3d, int offset);
+
 /*
 int ConvertPositions1DTo3DCalculatingVoxels(CALCULATINGVOXELS* data);
 int ConvertPositions3DTo1DCalculatingVoxels(CALCULATINGVOXELS* data);

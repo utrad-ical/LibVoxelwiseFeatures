@@ -32,10 +32,19 @@ SIFT_3D_FEATURES* CalculateSift3D_MultiPositions(
 	VOL_RAWVOLUMEDATA* volume, int ch_v, CALCULATINGVOXELS* samples,
 	int roi_size, int num_roi_division, int num_angle);
 
+SIFT_3D_FEATURES* CalculateSift3D_MultiPositions_MT(
+	VOL_RAWVOLUMEDATA* volume, int ch_v, CALCULATINGVOXELS* samples, 
+	int roi_size, int num_roi_division, int num_angle, int num_threads);
+
 
 VOL_RAWVOLUMEDATA* VolumeOfSift3D(
 	VOL_RAWVOLUMEDATA* volume, int vch, VOL_RAWVOLUMEDATA* mask, int mch, 
 	int roi_size, int num_roi_division, int num_angle);
+
+
+VOL_RAWVOLUMEDATA* VolumeOfSift3D_MT(
+	VOL_RAWVOLUMEDATA* volume, int ch_v, VOL_RAWVOLUMEDATA* mask, int ch_m, 
+	int roi_size, int num_roi_division, int num_angle, int num_threads);
 
 
 

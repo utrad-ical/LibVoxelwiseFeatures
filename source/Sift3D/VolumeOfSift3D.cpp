@@ -3,6 +3,7 @@
 
 
 #include "Sift3D.h"
+#include "Sift3D.private.h"
 
 
 VOL_RAWVOLUMEDATA* VolumeOfSift3D(
@@ -10,7 +11,20 @@ VOL_RAWVOLUMEDATA* VolumeOfSift3D(
 	int roi_size, int num_roi_division, int num_angle)
 {
 	fprintf(stderr, "get_points,");
-	CALCULATINGVOXELS* points = ConvertMaskToCalculatingVoxels(mask, mch);
+	CALCULATINGVOXELS* points;
+	if(mask!=NULL) {
+		points = ConvertMaskToCalculatingVoxels(mask, mch);
+	} else {
+		points = NewCalculatingVoxels(DATSIZE(volume));
+		int count=0;
+		for(int k=0; k<DEP(volume); k++) for(int j=0; j<HEI(volume); j++) for(int i=0; i<WID(volume); i++) {
+			points->rp[count] = count;
+			points->xc[count] = i;
+			points->yc[count] = j;
+			points->zc[count] = k;
+			count++;
+		}
+	}
 
 	fprintf(stderr, "%d,calc_sift,", points->num);
 	SIFT_3D_FEATURES* sift_feats = CalculateSift3D_MultiPositions(volume, vch, points, roi_size, num_roi_division, num_angle);

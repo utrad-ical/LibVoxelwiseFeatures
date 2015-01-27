@@ -7,7 +7,9 @@
 
 #include "Sift3D.h"
 
-
+#define DEP(v)	v->matrixSize->depth
+#define HEI(v)	v->matrixSize->height
+#define WID(v)	v->matrixSize->width
 
 
 
@@ -35,9 +37,7 @@ BOUNDING_BOX BoundingBoxOfSamplePositions(CALCULATINGVOXELS* samples)
 	return box;
 }
 
-#define DEP(v)	v->matrixSize->depth
-#define HEI(v)	v->matrixSize->height
-#define WID(v)	v->matrixSize->width
+
 
 
 
@@ -148,7 +148,7 @@ SIFT_3D_FEATURES* CalculateSift3D_MultiPositions(
 	int volsz3d[3];
 	volsz3d[0] = WID(volume);	volsz3d[1] = HEI(volume);	volsz3d[2] = DEP(volume);
 
-	fprintf(stderr, "c,");
+	fprintf(stderr, "roi_size%d,", roi_size);
 	int margin = 0;
 	for(int c=0; c<3; c++) {
 		box.top[c] -= roi_size/2;
@@ -156,12 +156,13 @@ SIFT_3D_FEATURES* CalculateSift3D_MultiPositions(
 		box.tail[c] += roi_size/2;
 		if(margin<box.tail[c]-volsz3d[c]+1)		margin = box.tail[c]-volsz3d[c]+1;
 	}
+	margin++;
 
 	fprintf(stderr, "d,");
 	VOL_RAWVOLUMEDATA* input_vol = VOL_ExtractSingleChannelRawVolumeData(volume, ch_v);
 	
 	if(margin>0) {
-		fprintf(stderr, "add_m,");
+		fprintf(stderr, "margin%d,", margin);
 		VOL_AttachOffsetXYZ(input_vol, margin, VOL_RESIZE_BACKGROUNDTYPE_BORDERCOPY_UNIFORM);
 		for(int i=0; i<samples->num; i++) {
 			samples->xc[i] += margin;
