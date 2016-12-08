@@ -2,7 +2,7 @@
 
 #include "HaarFeaturesByIntegral.h"
 #include "HaarFeaturesByIntegral.private.h"
-#include "..\Utilities\CheckRasterPositionedVoxelValuePresense.h"
+#include "../Utilities/CheckRasterPositionedVoxelValuePresense.h"
 
 #include "pthread.h"
 

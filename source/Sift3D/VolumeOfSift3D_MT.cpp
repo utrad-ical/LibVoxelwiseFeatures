@@ -5,7 +5,7 @@
 #include "pthread.h"
 #include "Sift3D.h"
 #include "Sift3D.private.h"
-#include "..\Utilities\DividedCalculatingVoxels.h"
+#include "../Utilities/DividedCalculatingVoxels.h"
 
 
 VOL_RAWVOLUMEDATA* VolumeOfSift3D_MT(
