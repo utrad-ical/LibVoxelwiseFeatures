@@ -46,7 +46,6 @@ VOL_RAWVOLUMEDATA* VolumeOfSift3D_MT(
 	VOL_RAWVOLUMEDATA* volume, int ch_v, VOL_RAWVOLUMEDATA* mask, int ch_m, 
 	int roi_size, int num_roi_division, int num_angle, int num_threads);
 
-
+#endif
 
 #define _SIFT_3D_H_
-#endif _SIFT_3D_H_
